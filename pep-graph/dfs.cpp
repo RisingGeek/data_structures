@@ -4,18 +4,15 @@
 
 using namespace std;
 
-void dfs(int src, int dest, vector<vector<Edge *>> graph, bool vis[], string ans)
+void dfs(int v, vector<vector<Edge *>> graph, bool vis[])
 {
-    if (src == dest)
-    {
-        cout << ans << endl;
-        return;
-    }
-    vis[src] = true;
-    for (Edge *e : graph[src])
+    cout << v << endl;
+
+    vis[v] = true;
+    for (Edge *e : graph[v])
     {
         if (vis[e->v] == false)
-            dfs(e->v, dest, graph, vis, ans + to_string(e->v));
+            dfs(e->v, graph, vis);
     }
 }
 
@@ -31,5 +28,5 @@ int main()
     addEdge(4, 6, 8, graph);
 
     bool vis[graph.size()];
-    dfs(0, 6, graph, vis, "");
+    dfs(2, graph, vis);
 }

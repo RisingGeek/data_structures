@@ -1,7 +1,6 @@
 public class morris_inorder {
     public static Node rightMost(Node curr, Node node) {
-        while (node.right != null) {
-            if(node.right == curr) return node;
+        while(node.right != null && node.right != curr) {
             node = node.right;
         }
         return node;
@@ -9,24 +8,26 @@ public class morris_inorder {
 
     public static void morrisInorder(Node root) {
         Node curr = root;
-
-        while (curr != null) {
-            Node nextLeft = curr.left;
-            if (nextLeft == null) {
-                System.out.print(curr.data + " ");
-                curr = curr.right;
-                continue;
+        while(curr != null) {
+            if(curr.left != null) {
+                Node pred = rightMost(curr, curr.left);
+                if(pred.right == curr) {
+                    //break thread
+                    pred.right = null;
+                    System.out.print(curr.data+" ");
+                    curr = curr.right;
+                }
+                else {
+                    //make thread
+                    pred.right = curr;
+                    curr = curr.left;
+                }
             }
-
-            Node right = rightMost(curr, nextLeft);
-            if (right.right == curr) {
-                System.out.print(curr.data + " ");
-                right.right = null;
+            else {
+                //leftmost node
+                System.out.print(curr.data+" ");
                 curr = curr.right;
-                continue;
             }
-            right.right = curr;
-            curr = curr.left;
         }
     }
 

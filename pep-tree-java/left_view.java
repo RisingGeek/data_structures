@@ -38,10 +38,10 @@ public class left_view {
     }
 
     public static void main(String[] args) {
-        int[] arr = { 10, 20, 30, -1, -1, 40, -1, -1, 50, 60, 80, -1, -1, -1, 70, 90, -1, 100, -1, -1, -1 };
+        int[] arr = { 1, 2, -1, 4, -1, 5, -1, 6, -1, -1, 3, -1, -1 };
         tree_util ct = new tree_util();
         Node root = ct.construct_tree(arr);
 
-        left_view_level_order(root);
+        left_view_tree(root, 0);
     }
 }
